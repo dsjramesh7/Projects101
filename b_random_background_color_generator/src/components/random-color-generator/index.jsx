@@ -6,9 +6,9 @@ export default function RandomBackgroundGenerator() {
 
   useEffect(() => {
     if (typeOfColor === "rgb") {
-      handleGenerateRGBColor;
+      handleGenerateRGBColor();
     } else {
-      handleGenerateHEXColor;
+      handleGenerateHEXColor();
     }
   }, [typeOfColor]);
 
