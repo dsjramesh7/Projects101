@@ -7,6 +7,7 @@ const QRCodeGenerator = () => {
 
   const handleGenerateQRCode = () => {
     setQrCode(input);
+    setInput("");
   };
 
   return (
