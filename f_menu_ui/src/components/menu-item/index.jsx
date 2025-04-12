@@ -7,27 +7,35 @@ const MenuItem = ({ item = [] }) => {
   );
 
   const handleToggleMenu = (getCurrentLabel) => {
-    // console.log(getCurrentLabel);
-    setDisplayCurrentMenuChildren({
-      ...displayCurrentMenuChildren,
-      [getCurrentLabel]: !displayCurrentMenuChildren[getCurrentLabel],
-    });
+    setDisplayCurrentMenuChildren((prev) => ({
+      ...prev,
+      [getCurrentLabel]: !prev[getCurrentLabel],
+    }));
   };
 
-  console.log(displayCurrentMenuChildren);
+  const isOpen = displayCurrentMenuChildren[item.label];
+
   return (
-    <li>
-      <div className="flex gap-4" onClick={() => handleToggleMenu(item.label)}>
-        <p>{item.label}</p>
-        {item && item.children && item.children.length ? <span>➕</span> : null}
+    <li className="list-none">
+      <div
+        onClick={() => handleToggleMenu(item.label)}
+        className={`flex items-center justify-between cursor-pointer px-4 py-2 rounded-lg transition-all
+          ${isOpen ? "bg-blue-100" : "bg-gray-100 hover:bg-gray-200"}
+        `}
+      >
+        <p className="text-gray-800 font-semibold">{item.label}</p>
+        {item.children && item.children.length > 0 && (
+          <span className="transition-transform duration-200 text-gray-600">
+            {isOpen ? "🔽" : "▶️"}
+          </span>
+        )}
       </div>
 
-      {item &&
-      item.children &&
-      item.children.length > 0 &&
-      displayCurrentMenuChildren[item.label] ? (
-        <MenuUI menus={item.children} />
-      ) : null}
+      {item.children && item.children.length > 0 && isOpen && (
+        <div className="ml-4 border-l-2 border-blue-300 pl-3 mt-1">
+          <MenuUI menus={item.children} />
+        </div>
+      )}
     </li>
   );
 };
