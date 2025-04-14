@@ -22,7 +22,7 @@ const App = () => {
   ];
 
   const handleChange = (currentIndex) => {
-    console.log(currentIndex);
+    console.log("currentIndex: ", currentIndex);
   };
 
   return (
