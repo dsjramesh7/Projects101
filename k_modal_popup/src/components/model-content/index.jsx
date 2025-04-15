@@ -1,10 +1,12 @@
 import React from "react";
 
-const ModalContent = ({ id, header, footer, body }) => {
+const ModalContent = ({ id, header, footer, body, handleClose }) => {
   return (
     <div id={id || "Modal"} className="modal">
       <div className="modal-header">
-        <span className="modal-close">❌</span>
+        <span className="modal-close" onClick={handleClose}>
+          ❌
+        </span>
         <h1 className="modal-title">{header ? header : "Header"}</h1>
       </div>
       <div className="modal-body">
