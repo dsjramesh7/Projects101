@@ -15,19 +15,22 @@ const GitHubProfileFinder = () => {
       console.log(result);
       if (result) {
         setUserData(result);
+        setLoading(false);
+        setUserName("");
       }
-      setLoading(false);
     } catch (error) {
       setErrorMsg(error.message);
       setLoading(false);
     }
   };
 
+  const handleSubmit = () => {
+    fetchGithubData();
+  };
+
   useEffect(() => {
     fetchGithubData();
   }, []);
-
-  const handleSubmit = () => {};
 
   if (loading) {
     return <h1>Loading Data wait........</h1>;
