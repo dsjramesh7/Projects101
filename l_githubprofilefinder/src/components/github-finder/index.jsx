@@ -37,24 +37,44 @@ const GitHubProfileFinder = () => {
   }
 
   return (
-    <div>
-      <div className="flex gap-4">
+    <div className="flex flex-col items-center py-12 px-4">
+      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">
+        GitHub Profile Finder 🚀
+      </h1>
+
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md flex items-center gap-3 mb-8"
+      >
         <input
-          className="border border-green-300 px-4 py-5"
+          className="flex-grow px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm text-gray-700"
           type="text"
-          placeholder="Enter github profile username here..."
+          placeholder="Enter GitHub username..."
           name="search-by-username"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
         />
         <button
-          onClick={handleSubmit}
-          className="bg-red-400 text-white px-2 py-4"
+          type="submit"
+          className="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow transition duration-200"
         >
           Search
         </button>
-      </div>
-      <div>{userData && <User user={userData} />}</div>
+      </form>
+
+      {loading && (
+        <p className="text-xl text-gray-600 animate-pulse">
+          Loading data, please wait...
+        </p>
+      )}
+
+      {errorMsg && (
+        <div className="text-red-600 text-lg font-medium bg-red-100 px-4 py-3 rounded-xl shadow">
+          Error: {errorMsg}
+        </div>
+      )}
+
+      {userData && <User user={userData} />}
     </div>
   );
 };
