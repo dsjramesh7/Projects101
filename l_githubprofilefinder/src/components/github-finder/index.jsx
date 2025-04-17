@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import User from "../user-show";
 
 const GitHubProfileFinder = () => {
   const [userName, setUserName] = useState("dsjramesh7");
@@ -11,7 +12,7 @@ const GitHubProfileFinder = () => {
     try {
       const response = await fetch(`https://api.github.com/users/${userName}`);
       const result = await response.json();
-      // console.log(result);
+      console.log(result);
       if (result) {
         setUserData(result);
       }
@@ -53,6 +54,7 @@ const GitHubProfileFinder = () => {
           Search
         </button>
       </div>
+      <div>{userData && <User user={userData} />}</div>
     </div>
   );
 };
