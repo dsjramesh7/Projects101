@@ -6,8 +6,29 @@ const SearchCompletionWithAPI = () => {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
-  // const [searchParam, setSearchParam] = useState("");
-  // const [showDropDown, setShowDropDown] = useState(false);
+  const [searchParam, setSearchParam] = useState("");
+  const [showDropDown, setShowDropDown] = useState(false);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
+  function handleChange(e) {
+    const query = e.target.value.toLowerCase();
+    setSearchParam(query);
+    // console.log("query= ", query);
+    if (query.length > 1) {
+      const filteredData =
+        userData && userData.length
+          ? userData.filter((item) => item.toLowerCase().indexOf(query) > -1)
+          : [];
+      setFilteredUsers(filteredData);
+      setShowDropDown(true);
+    } else {
+      setShowDropDown(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchUsersDataFromAPI();
+  }, []);
 
   const fetchUsersDataFromAPI = async () => {
     setLoading(true);
@@ -22,18 +43,14 @@ const SearchCompletionWithAPI = () => {
         setUserData(
           result.users.map((mooncolorwhite) => mooncolorwhite.firstName)
         );
-        setLoading(false);
       }
     } catch (error) {
       setErrorMsg(error.message);
-      setLoading(false);
     }
+    setLoading(false);
   };
 
-  useEffect(() => {
-    fetchUsersDataFromAPI();
-  }, []);
-
+  console.log(userData);
   if (loading) {
     return <div>Loading Wait......</div>;
   }
@@ -42,9 +59,6 @@ const SearchCompletionWithAPI = () => {
     return <div>{`Error => ${errorMsg}`}</div>;
   }
 
-  function handleChange() {
-    console.log("asdf");
-  }
   return (
     <div>
       <div>
@@ -52,7 +66,7 @@ const SearchCompletionWithAPI = () => {
           type="text"
           name="search-user"
           placeholder="Search User Here..."
-          onChange={() => handleChange}
+          onChange={handleChange}
         />
       </div>
     </div>
