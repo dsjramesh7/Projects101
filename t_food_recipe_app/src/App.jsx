@@ -3,7 +3,7 @@ import Navbar from "./components/navbar";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/home/index";
 import FavouritePage from "./pages/favourites/index";
-import AboutPage from "./pages/about/index";
+import DetailsPage from "./pages/details";
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/favourites" element={<FavouritePage />} />
         </Routes>
         <Routes>
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/recipe-item/:id" element={<DetailsPage />} />
         </Routes>
       </div>
     </div>
