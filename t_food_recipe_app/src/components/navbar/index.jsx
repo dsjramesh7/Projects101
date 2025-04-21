@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { GlobalContext } from "../../context";
 
 const Navbar = () => {
+  const { searchParam, setSearchParam, handleSubmit } =
+    useContext(GlobalContext);
+  console.log("searchParam: ", searchParam);
   return (
     <nav className="flex flex-col justify-between items-center py-8 container mx-auto lg:flex-row gap-5 lg:gap-0">
       <h1 className="text-2xl font-semibold">
@@ -9,8 +13,10 @@ const Navbar = () => {
           Food<span className="text-red-400">Mania</span>
         </NavLink>
       </h1>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <input
+          value={searchParam}
+          onChange={(event) => setSearchParam(event.target.value)}
           type="text"
           name="search"
           placeholder="Search Food here..."
