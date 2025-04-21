@@ -26,12 +26,6 @@ export default function GlobalState({ children }) {
       setSearchParam("");
     }
   };
-
-  if (loading) {
-    return (
-      <h1 className="text-red-400 font-bold text-4xl">Loading wait.....</h1>
-    );
-  }
   return (
     <GlobalContext.Provider
       value={{
