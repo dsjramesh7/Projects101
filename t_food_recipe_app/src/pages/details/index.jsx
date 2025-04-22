@@ -42,7 +42,8 @@ const DetailsPage = () => {
               className="p-3 px-8 rounded-lg text-sm uppercase font-medium tracking-wider mt-3 inline-block shadow-md bg-black text-white cursor-pointer"
               onClick={() => handleAddFavourite(recipeData)}
             >
-              {favouritesList.findIndex(
+              {favouritesList.length &&
+              favouritesList.findIndex(
                 (item) => item?.id === recipeData?.id
               ) !== -1
                 ? "Remove From Favourites"

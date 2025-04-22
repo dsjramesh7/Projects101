@@ -20,7 +20,7 @@ export default function GlobalState({ children }) {
         `https://forkify-api.herokuapp.com/api/v2/recipes?search=${searchParam}`
       );
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       if (result?.data?.recipes) {
         setRecipesList(result?.data?.recipes);
         setLoading(false);
@@ -49,7 +49,7 @@ export default function GlobalState({ children }) {
     setFavouritesList(cpyFavouritesList);
   }
 
-  console.log("FavouriteList", favouritesList);
+  // console.log("FavouriteList", favouritesList);
   return (
     <GlobalContext.Provider
       value={{

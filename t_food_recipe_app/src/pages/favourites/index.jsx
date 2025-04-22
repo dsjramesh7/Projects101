@@ -4,7 +4,7 @@ import Recipe from "../../components/single-recipe";
 
 const FavouritePage = () => {
   const { favouritesList } = useContext(GlobalContext);
-  // console.log("recipesList", recipesList);
+  // console.log("favouritesList", favouritesList);
   return (
     <div className="py-10 container mx-auto flex flex-wrap justify-center gap-10">
       {favouritesList && favouritesList.length > 0 ? (

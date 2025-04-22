@@ -5,7 +5,7 @@ import { GlobalContext } from "../../context";
 const Navbar = () => {
   const { searchParam, setSearchParam, handleSubmit } =
     useContext(GlobalContext);
-  console.log("searchParam: ", searchParam);
+  // console.log("searchParam: ", searchParam);
   return (
     <nav className="flex flex-col justify-between items-center py-8 container mx-auto lg:flex-row gap-5 lg:gap-0">
       <h1 className="text-2xl font-semibold">
