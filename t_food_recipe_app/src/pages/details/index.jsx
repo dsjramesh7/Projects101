@@ -4,7 +4,7 @@ import { GlobalContext } from "../../context";
 
 const DetailsPage = () => {
   const { id } = useParams();
-  const { recipeData, setRecipeData, handleAddFavourite } =
+  const { recipeData, setRecipeData, handleAddFavourite, favouritesList } =
     useContext(GlobalContext);
 
   const fetchOnlyRecipeDetails = async () => {
@@ -42,7 +42,11 @@ const DetailsPage = () => {
               className="p-3 px-8 rounded-lg text-sm uppercase font-medium tracking-wider mt-3 inline-block shadow-md bg-black text-white cursor-pointer"
               onClick={() => handleAddFavourite(recipeData)}
             >
-              Save as favourites
+              {favouritesList.findIndex(
+                (item) => item?.id === recipeData?.id
+              ) !== -1
+                ? "Remove From Favourites"
+                : "Add To Favourites"}
             </button>
           </div>
           <div>
