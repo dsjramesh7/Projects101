@@ -4,7 +4,8 @@ import { GlobalContext } from "../../context";
 
 const DetailsPage = () => {
   const { id } = useParams();
-  const { recipeData, setRecipeData } = useContext(GlobalContext);
+  const { recipeData, setRecipeData, handleAddFavourite } =
+    useContext(GlobalContext);
 
   const fetchOnlyRecipeDetails = async () => {
     const response = await fetch(
@@ -36,7 +37,14 @@ const DetailsPage = () => {
           <h3 className="font-bold text-2xl truncate text-black">
             {recipeData?.title}
           </h3>
-
+          <div>
+            <button
+              className="p-3 px-8 rounded-lg text-sm uppercase font-medium tracking-wider mt-3 inline-block shadow-md bg-black text-white cursor-pointer"
+              onClick={() => handleAddFavourite(recipeData)}
+            >
+              Save as favourites
+            </button>
+          </div>
           <div>
             <span className="text-2xl font-semibold text-black">
               Ingredients:
