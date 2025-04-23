@@ -12,7 +12,7 @@ const HomePage = () => {
     try {
       const response = await fetch("https://fakestoreapi.com/products");
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       setProducts(result);
       setLoading(false);
     } catch (error) {
