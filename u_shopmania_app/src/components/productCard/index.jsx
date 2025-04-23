@@ -11,11 +11,11 @@ const ProductCard = ({ item }) => {
         />
       </div>
       <div className="p-4 space-y-2">
-        <h1 className="text-xl font-semibold text-gray-800 truncate">
+        <h1 className="w-40 text-xl font-semibold text-gray-800 truncate">
           {item?.title}
         </h1>
         <p className="text-lg text-gray-600">${item?.price}</p>
-        <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition-colors duration-200">
+        <button className="cursor-pointer w-full bg-red-400 text-white py-2 px-4 rounded-xl hover:bg-red-700 transition-colors duration-200">
           Add To Cart
         </button>
       </div>
