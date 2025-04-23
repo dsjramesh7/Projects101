@@ -29,13 +29,17 @@ const HomePage = () => {
     return <div>Error: ${error}</div>;
   }
   return (
-    <div>
+    <div className="container mx-auto mt-4">
       {loading ? (
         <div className="min-h-screen w-full flex flex-col justify-center items-center">
           <PacmanLoader />
         </div>
       ) : products && products.length > 0 ? (
-        products.map((item) => <ProductCard key={item.id} item={item} />)
+        <div className="flex flex-wrap gap-4">
+          {products.map((item) => (
+            <ProductCard key={item.id} item={item} />
+          ))}
+        </div>
       ) : (
         <h1>No Products Data present</h1>
       )}
