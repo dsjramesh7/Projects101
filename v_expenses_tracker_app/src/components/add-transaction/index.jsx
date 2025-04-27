@@ -27,7 +27,7 @@ export default function TransactionForm({ onClose, isOpen }) {
   };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <form onSubmit={handleSubmit}>
+      <form>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add New Transaction</ModalHeader>
