@@ -14,7 +14,18 @@ export default function GlobalState({ children }) {
   const [allTransaction, setAllTransaction] = useState([]);
 
   const handleFormSubmit = (currentFormData) => {
-    console.log(currentFormData);
+    // console.log(currentFormData);
+
+    if (!currentFormData.description || !currentFormData.amount) {
+      return;
+    }
+
+    setAllTransaction([
+      ...allTransaction,
+      { ...currentFormData, id: Date.now() },
+    ]);
+
+    console.log(allTransaction);
   };
   return (
     <GlobalContext.Provider
