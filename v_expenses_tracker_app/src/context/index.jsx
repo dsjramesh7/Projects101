@@ -12,10 +12,14 @@ export default function GlobalState({ children }) {
   const [totalExpense, setTotalExpense] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
   const [allTransaction, setAllTransaction] = useState([]);
+
+  const handleFormSubmit = (currentFormData) => {
+    console.log(currentFormData);
+  };
   return (
     <GlobalContext.Provider
-      value={
-        (formData,
+      value={{
+        formData,
         setFormData,
         value,
         setValue,
@@ -24,8 +28,9 @@ export default function GlobalState({ children }) {
         totalIncome,
         setTotalIncome,
         allTransaction,
-        setAllTransaction)
-      }
+        setAllTransaction,
+        handleFormSubmit,
+      }}
     >
       {children}
     </GlobalContext.Provider>
