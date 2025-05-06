@@ -22,6 +22,16 @@ const HomePage = () => {
     fetchAllBlogs();
   }, []);
 
+  const handleDeleteBlog = async (getCurrentId) => {
+    const response = await axios.delete(
+      `http://localhost:5000/api/blogs/delete/${getCurrentId}`
+    );
+    const result = await response.data;
+    if (result?.message) {
+      fetchAllBlogs();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 sm:px-8">
       <div className="max-w-4xl mx-auto">
@@ -49,6 +59,17 @@ const HomePage = () => {
                 <p className="text-sm text-gray-400 mt-2">
                   {new Date(item.date).toLocaleString()}
                 </p>
+                <div className="mt-4 flex space-x-4">
+                  <button
+                    onClick={() => handleDeleteBlog(item?._id)}
+                    className="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-colors"
+                  >
+                    Delete
+                  </button>
+                  <button className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors">
+                    Update
+                  </button>
+                </div>
               </div>
             ))}
           </div>
