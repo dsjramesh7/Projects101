@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -6,21 +7,15 @@ const Header = () => {
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="text-2xl font-bold text-gray-800">MyBlog</div>
+        <div className="text-2xl font-bold text-gray-800">Mern Blog App</div>
 
         <nav className="hidden md:flex space-x-6 text-gray-700 font-medium">
-          <a href="/" className="hover:text-blue-600">
+          <Link to={"/"} className="hover:text-blue-600">
             Home
-          </a>
-          <a href="/blog" className="hover:text-blue-600">
-            Blog
-          </a>
-          <a href="/about" className="hover:text-blue-600">
-            About
-          </a>
-          <a href="/contact" className="hover:text-blue-600">
-            Contact
-          </a>
+          </Link>
+          <Link to={"/add-blog"} className="hover:text-blue-600">
+            Add a Blog
+          </Link>
         </nav>
 
         <button
