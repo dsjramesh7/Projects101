@@ -1,24 +1,35 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../../../context";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const AddBlogPage = () => {
-  const { formData, setFormData } = useContext(GlobalContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { formData, setFormData, setIsEdit, isEdit } =
+    useContext(GlobalContext);
   // console.log("formData", formData);
 
   const handleSaveBlogToDatabase = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/blogs/add", {
-        title: formData.title,
-        description: formData.description,
-      });
+      const response = isEdit
+        ? await axios.put(
+            `http://localhost:5000/api/blogs/update/${location?.state?.getCurrentBlogItem?._id}`,
+            {
+              title: formData.title,
+              description: formData.description,
+            }
+          )
+        : await axios.post("http://localhost:5000/api/blogs/add", {
+            title: formData.title,
+            description: formData.description,
+          });
       const result = await response.data;
-      console.log("Success:", result);
+      // console.log("Success:", result);
 
       if (result) {
+        setIsEdit(false);
         setFormData({
           title: "",
           description: "",
@@ -26,15 +37,26 @@ const AddBlogPage = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log("We are here");
       console.error("Error saving blog:", error);
     }
   };
+
+  useEffect(() => {
+    // console.log(location);
+    if (location.state) {
+      const { getCurrentBlogItem } = location.state;
+      setIsEdit(true);
+      setFormData({
+        title: getCurrentBlogItem.title,
+        description: getCurrentBlogItem.description,
+      });
+    }
+  }, [location]);
   return (
     <div className="h-screen bg-gray-100 flex items-center justify-center p-6">
       <div className="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-lg">
         <h1 className="text-3xl font-bold mb-6 text-gray-800">
-          Add Your New Blog
+          {isEdit ? "Edit Your Blog" : "Add Your New Blog"}
         </h1>
         <form className="space-y-6">
           <div>
@@ -86,7 +108,7 @@ const AddBlogPage = () => {
             type="submit"
             className="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
           >
-            Add New Blog
+            {isEdit ? "Edit Blog" : "Add New Blog"}
           </button>
         </form>
       </div>

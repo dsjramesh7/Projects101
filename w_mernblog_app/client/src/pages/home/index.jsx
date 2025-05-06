@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { GlobalContext } from "../../../context";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const { blogList, setBlogList, pending, setPending } =
     useContext(GlobalContext);
 
@@ -30,6 +32,11 @@ const HomePage = () => {
     if (result?.message) {
       fetchAllBlogs();
     }
+  };
+
+  const handleEditBlog = async (getCurrentBlogItem) => {
+    // console.log(getCurrentBlogItem);
+    navigate("/add-blog", { state: { getCurrentBlogItem } });
   };
 
   return (
@@ -66,8 +73,11 @@ const HomePage = () => {
                   >
                     Delete
                   </button>
-                  <button className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors">
-                    Update
+                  <button
+                    onClick={() => handleEditBlog(item)}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors"
+                  >
+                    Edit
                   </button>
                 </div>
               </div>
